@@ -1,0 +1,21 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: load-runner
+spec:
+  template:
+    spec:
+      containers:
+      - name: load-runner
+        image: robotshop/rs-load
+        env:
+          - name: HOST
+            value: "http://frontend.default.svc.cluster.local"
+          - name: NUM_CLIENTS
+            value: "10"
+          - name: RUN_TIME
+            value: "5m"
+          - name: ERROR
+            value: "0"
+      restartPolicy: Never
+  backoffLimit: 0
